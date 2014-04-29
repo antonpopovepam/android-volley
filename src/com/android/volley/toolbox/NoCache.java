@@ -18,12 +18,18 @@ package com.android.volley.toolbox;
 
 import com.android.volley.Cache;
 
+import java.util.List;
+
 /**
  * A cache that doesn't.
  */
 public class NoCache implements Cache {
     @Override
     public void clear() {
+    }
+
+    public List<String> getCachedKeys(String pattern) {
+        return null;
     }
 
     @Override

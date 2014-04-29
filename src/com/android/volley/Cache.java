@@ -17,6 +17,7 @@
 package com.android.volley;
 
 import java.util.Collections;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -29,6 +30,13 @@ public interface Cache {
      * @return An {@link Entry} or null in the event of a cache miss
      */
     public Entry get(String key);
+
+    /**
+     * Retrieves all cached keys
+     * @param pattern Key substring. All keys with this substring are returned
+     * @return
+     */
+    public List<String> getCachedKeys(String pattern);
 
     /**
      * Adds or replaces an entry to the cache.

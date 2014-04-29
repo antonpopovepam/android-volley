@@ -29,10 +29,12 @@ import java.io.FilterInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -96,6 +98,27 @@ public class DiskBasedCache implements Cache {
         mEntries.clear();
         mTotalSize = 0;
         VolleyLog.d("Cache cleared.");
+    }
+
+    /**
+     * Retrieves all cached keys
+     * @param pattern Key substring. All keys with this substring are returned
+     * @return
+     */
+    @Override
+    public synchronized List<String> getCachedKeys(String pattern) {
+        List<String> result = new ArrayList<>();
+        if (pattern == null || pattern.length() == 0) {
+            return result;
+        }
+
+        for (String key : mEntries.keySet()) {
+            if (key.indexOf(pattern) != -1) {
+                result.add(key);
+            }
+        }
+
+        return result;
     }
 
     /**
